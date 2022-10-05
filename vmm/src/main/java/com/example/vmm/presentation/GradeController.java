@@ -37,4 +37,9 @@ public record GradeController(GradeRepository gradeRepository, StudentRepository
         return "redirect:/students/" + id;
     }
 
+    @GetMapping("/error")
+    public String redirectToErrorPage(){
+        return "error";
+    }
+
 }

@@ -23,4 +23,9 @@ public record TaskController(TaskRepository taskRepository, EmployeeRepository e
         model.addAttribute("tasks", taskRepository.allTasksByEmployee(id));
         return "tasks-list";
     }
+
+    @GetMapping("/error")
+    public String redirectToErrorPage(){
+        return "error";
+    }
 }
