@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Subject</th>
+        <th>Grade</th>
+    </tr>
+    <tr th:each="grade: ${grades}">
+        <td th:text="${grade.assigned_date}"></td>
+        <td th:text="${grade.subject}"></td>
+        <td th:text="${grade.assigned_grade}"></td>
+    </tr>
+</table>
+<h2>New Record</h2>
+<form method="post" th:object="${newgrade}">
+    <select name="subject" th:field="${newgrade.subject}">
+        <option th:each="subject: ${T(com.example.vmm.domain.Subject).values()}" th:value="${subject}" th:text="${subject}"></option>
+    </select>
+    <br>
+    <input type="radio" th:each="gradeNumbers: ${#numbers.sequence(1,5)}" th:value="${gradeNumbers}" th:text="${gradeNumbers}" th:field="${newgrade.assigned_grade}">
+    <br>
+    <input type="date" th:field="${newgrade.assigned_date}" name="date">
+    <br>
+    <input type="submit">
+</form>
+<a th:href="@{/students}">
+    <button>Back</button>
+</a>
+</body>
+</html>
