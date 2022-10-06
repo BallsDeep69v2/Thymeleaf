@@ -1,5 +1,6 @@
 package com.example.employee.presentation;
 
+import com.example.employee.domain.exception.NoSuchEmployeeException;
 import com.example.employee.persistence.EmployeeRepository;
 import com.example.employee.persistence.TaskRepository;
 import org.springframework.stereotype.Controller;
@@ -20,12 +21,14 @@ public record TaskController(TaskRepository taskRepository, EmployeeRepository e
 
     @GetMapping("/tasks")
     public String allTasksForEmployee(@RequestParam(name = "employee") String id, Model model) {
+        if (!employeeRepository.existsById(id))
+            throw new NoSuchEmployeeException();
         model.addAttribute("tasks", taskRepository.allTasksByEmployee(id));
         return "tasks-list";
     }
 
     @GetMapping("/error")
-    public String redirectToErrorPage(){
+    public String redirectToErrorPage() {
         return "error";
     }
 }

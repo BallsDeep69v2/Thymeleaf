@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+    table, th, td{
+        border:1px solid black;
+        border-collapse: collapse;
+    }
+</style>
 <body>
 <table>
     <tr>
@@ -19,16 +25,20 @@
 </table>
 <h2>New Record</h2>
 <form method="post" th:object="${newgrade}">
+    <label>Subject: </label>
     <select name="subject" th:field="${newgrade.subject}">
         <option th:each="subject: ${T(com.example.vmm.domain.Subject).values()}" th:value="${subject}" th:text="${subject}"></option>
     </select>
     <br>
+    <label>Grade: </label>
     <input type="radio" th:each="gradeNumbers: ${#numbers.sequence(1,5)}" th:value="${gradeNumbers}" th:text="${gradeNumbers}" th:field="${newgrade.assigned_grade}">
     <br>
+    <label>Date: </label>
     <input type="date" th:field="${newgrade.assigned_date}" name="date">
     <br>
     <input type="submit">
 </form>
+<br>
 <a th:href="@{/students}">
     <button>Back</button>
 </a>

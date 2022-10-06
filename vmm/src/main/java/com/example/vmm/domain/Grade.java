@@ -28,7 +28,7 @@ public class Grade {
     @JoinColumn(name="student_id")
     private Student student;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
     @Past
     @NotNull
     private LocalDate assigned_date;
