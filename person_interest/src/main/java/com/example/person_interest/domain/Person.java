@@ -1,8 +1,6 @@
 package com.example.person_interest.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,26 +16,28 @@ import java.util.Set;
 @Entity
 @RequiredArgsConstructor
 @Table(name="persons")
+@Getter
+@Setter
 public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Pattern(regexp = "\\b([A-Z]*)\\b")
+    @Pattern(regexp = "[A-ZÄÖÜ][a-zäöüß]*", message = "Vorname entspricht nicht dem vorgegebenen Muster")
     @Size(max = 30)
     private String firstName;
 
-    @Pattern(regexp = "[A-Z]")
+    @Pattern(regexp = "[A-ZÄÖÜ][a-zäöüß]*", message = "Nachname entspricht nicht dem vorgegebenen Muster")
     @Size(max = 30)
     private String lastName;
 
-    @Past
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    @Past(message = "Localdate muss in der Zukunft liegen")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
     @ManyToMany
-    @Size(max = 3)
+    @Size(max = 3, message = "Es dürfen maximal 3 Interests ausgewählt werden")
     @JoinTable(name="persons_interests")
     private Set<Interest> interests = new HashSet<>();
 
@@ -55,5 +55,14 @@ public class Person {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "firstName = " + firstName + ", " +
+                "lastName = " + lastName + ", " +
+                "dateOfBirth = " + dateOfBirth + ", " +
+                "sex = " + sex + ")";
     }
 }

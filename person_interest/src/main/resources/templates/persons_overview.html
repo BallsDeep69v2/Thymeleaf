@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Person Overview</title>
 </head>
 <body>
-
+<table>
+    <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Date of Birth</th>
+        <th>Sex</th>
+        <th>Interest</th>
+    </tr>
+    <tr th:each="person: ${all_persons}">
+        <td th:text="${person.firstName}">
+        <td th:text="${person.lastName}"></td>
+        <td th:text="${person.dateOfBirth}"></td>
+        <td th:text="${person.sex}"></td>
+        <td th:text="${#strings.listJoin(person.interests.![description], ', ')}"></td>
+    </tr>
+</table>
+<button>
+    <a th:href="@{/persons/new}">Neue Person hinzufügen</a>
+</button>
 </body>
 </html>

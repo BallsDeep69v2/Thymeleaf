@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new person</title>
+</head>
+<body>
+<form method="post" th:object="${new_person}" th:action="@{/persons/new}">
+    <label>Last Name:</label>
+    <input type="text" th:field="${new_person.lastName}" name="lastName">
+    <br>
+    <span th:if="${#fields.hasErrors('lastName')}"
+          th:errors="${new_person.lastName}"/>
+    <br>
+    <label>First Name:</label>
+    <input type="text" th:field="${new_person.firstName}">
+    <br>
+    <span th:if="${#fields.hasErrors('firstName')}"
+          th:errors="${new_person.firstName}"/>
+    <br>
+    <label>Date of birth:</label>
+    <input type="date" th:field="${new_person.dateOfBirth}">
+    <br>
+    <span th:if="${#fields.hasErrors('dateOfBirth')}"
+          th:errors="${new_person.dateOfBirth}"/>
+    <br>
+    <lable>Sex: </lable>
+    <select th:field="${new_person.sex}">
+        <option th:each="sex: ${allSexes}" th:text="${sex}" th:value="${sex}"></option>
+    </select>
+    <br>
+    <fieldset>
+        <input type="checkbox" th:each=" interest: ${allInterests}" th:value="${interest.id}" th:text="${interest}" th:field="${new_person.interests}">
+    </fieldset>
+    <span th:if="${#fields.hasErrors('interests')}"
+          th:errors="${new_person.interests}"/>
+    <input type="submit">
+</form>
+</body>
+</html>
