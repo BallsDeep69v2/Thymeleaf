@@ -5,6 +5,7 @@ import org.hibernate.Hibernate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -32,8 +33,9 @@ public class Person {
     @Size(max = 30)
     private String lastName;
 
-    @Past(message = "Localdate muss in der Zukunft liegen")
+    @Past(message = "Localdate muss in der Vergangenheit liegen")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Geburtsdatum muss ausgefüllt werden")
     private LocalDate dateOfBirth;
 
     @ManyToMany

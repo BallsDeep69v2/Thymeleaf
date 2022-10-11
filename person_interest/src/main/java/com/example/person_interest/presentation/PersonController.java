@@ -42,5 +42,10 @@ public record PersonController(PersonRepository personRepository, InterestReposi
         return "redirect:/persons";
     }
 
+    @GetMapping("/error")
+    public String redirectToError(){
+        return "error";
+    }
+
 
 }
