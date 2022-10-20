@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -29,7 +30,7 @@ public class Grade {
     private Student student;
 
     @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
-    @Past
+    @PastOrPresent
     @NotNull
     private LocalDate assigned_date;
 

@@ -46,6 +46,4 @@ public record PersonController(PersonRepository personRepository, InterestReposi
     public String redirectToError(){
         return "error";
     }
-
-
 }

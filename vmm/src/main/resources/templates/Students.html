@@ -13,7 +13,7 @@
     <tr th:each="student: ${students}">
         <td th:text="${student}"></td>
         <td>
-            <a th:href="@{/students/{id} (id=${student.id})}" th:text="${student.grades.size}"></a>
+            <a th:href="@{/students/{id} (id=${student.id})}" th:text="${student.grades.size} + Grades"></a>
         </td>
     </tr>
 </table>

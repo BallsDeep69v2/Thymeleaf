@@ -10,24 +10,24 @@
     }
 </style>
 <body>
-<form method="post" th:object="${new_person}" th:action="@{/persons/new}">
+<form method="post" th:object="${new_person}">
     <label>Last Name:</label>
     <input type="text" th:field="${new_person.lastName}" name="lastName">
     <br>
     <span th:if="${#fields.hasErrors('lastName')}"
-          th:errors="${new_person.lastName}" class="error"/>
+          th:errors="${new_person.lastName}" class="error"></span>
     <br>
     <label>First Name:</label>
     <input type="text" th:field="${new_person.firstName}">
     <br>
     <span th:if="${#fields.hasErrors('firstName')}"
-          th:errors="${new_person.firstName}" class="error"/>
+          th:errors="${new_person.firstName}" class="error"></span>
     <br>
     <label>Date of birth:</label>
     <input type="date" th:field="${new_person.dateOfBirth}">
     <br>
     <span th:if="${#fields.hasErrors('dateOfBirth')}"
-          th:errors="${new_person.dateOfBirth}" class="error"/>
+          th:errors="${new_person.dateOfBirth}" class="error"></span>
     <br>
     <lable>Sex: </lable>
     <select th:field="${new_person.sex}">
@@ -38,7 +38,7 @@
         <input type="checkbox" th:each=" interest: ${allInterests}" th:value="${interest.id}" th:text="${interest}" th:field="${new_person.interests}">
     </fieldset>
     <span th:if="${#fields.hasErrors('interests')}"
-          th:errors="${new_person.interests}" class="error"/>
+          th:errors="${new_person.interests}" class="error"></span>
     <br>
     <input type="submit">
 </form>

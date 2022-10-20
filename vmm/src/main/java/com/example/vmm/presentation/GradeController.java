@@ -5,10 +5,7 @@ import com.example.vmm.persistence.GradeRepository;
 import com.example.vmm.persistence.StudentRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -31,7 +28,7 @@ public record GradeController(GradeRepository gradeRepository, StudentRepository
     }
 
     @PostMapping("/{id}")
-    public String redirectAfterSaving(@PathVariable String id, @Valid Grade grade) {
+    public String redirectAfterSaving(@PathVariable String id, @Valid @ModelAttribute("newgrade") Grade grade) {
         grade.setStudent(studentRepository.findById(id).orElseThrow());
         gradeRepository.save(grade);
         return "redirect:/students/" + id;
